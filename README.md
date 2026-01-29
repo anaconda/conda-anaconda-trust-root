@@ -89,6 +89,10 @@ Conda signature verification defends against:
 - TLS misconfiguration
 - Tampering with packages after they leave Anaconda's secure build network
 
+## Documentation
+
+- [ARCHITECTURE.md](ARCHITECTURE.md) - Detailed document covering the history, rationale, and implementation of the signature verification architecture.
+
 ## Related Projects
 
 - [conda](https://github.com/conda/conda) - The package management system
