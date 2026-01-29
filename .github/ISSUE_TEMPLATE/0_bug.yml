@@ -1,0 +1,43 @@
+name: Bug Report
+description: Create a bug report.
+labels: [type::bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+        Note: Please search to see if an issue already exists for the bug you encountered.
+  - type: textarea
+    attributes:
+      label: Describe the bug
+      description: What is the problem? A clear and concise description of the bug.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Expected behavior
+      description: What did you expect to happen?
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Steps to reproduce
+      description: |
+        What are the steps to reproduce this bug?
+        1. First step
+        2. Second step
+        3. etc.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Environment info
+      description: |
+        Please provide your Python version and OS.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Additional context
+      description: Add any other context about the problem here.

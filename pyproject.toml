@@ -1,0 +1,115 @@
+[build-system]
+build-backend = "hatchling.build"
+requires = [
+  "hatch-vcs >=0.2.0",
+  "hatchling >=1.12.2",
+]
+
+[project]
+classifiers = [
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = []
+description = "Anaconda's initial trust root metadata for conda package signature verification."
+dynamic = ["version"]
+# license = {file = "LICENSE"}  # TBD - pending legal review
+name = "conda-anaconda-trust-root"
+requires-python = ">=3.10"
+
+[tool.coverage.report]
+exclude_lines = [
+  "pragma: no cover",
+  "if TYPE_CHECKING:",  # ignore type checking imports
+]
+omit = [
+  "tests/*",
+]
+show_missing = true
+skip_covered = true
+sort = "Miss"
+
+[tool.coverage.run]
+# store relative paths in coverage information
+relative_files = true
+
+[tool.hatch.build]
+include = ["conda_anaconda_trust_root"]
+
+[tool.hatch.build.hooks.vcs]
+version-file = "conda_anaconda_trust_root/_version.py"
+
+[tool.hatch.build.targets.wheel.shared-data]
+# Install the trust root data files to $PREFIX/etc/conda/
+"conda_anaconda_trust_root/data/1.root.json" = "etc/conda/1.root.json"
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.version.raw-options]
+local_scheme = "dirty-tag"
+
+[tool.pytest.ini_options]
+addopts = [
+  "--color=yes",
+  # "--cov=conda_anaconda_trust_root",  # passed in test runner scripts instead (avoid debugger)
+  "--cov-report=term",  # print summary table to screen
+  "--cov-report=xml",  # for codecov/codecov-action upload
+  "--tb=native",
+  "-vv",
+]
+filterwarnings = [
+  # elevate all deprecation warnings to errors
+  "error::DeprecationWarning",
+  "error::FutureWarning",
+  "error::PendingDeprecationWarning",
+]
+markers = [
+  "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py310"
+
+[tool.ruff.lint]
+extend-per-file-ignores = {"tests/*" = ["ANN", "D", "S101"]}
+ignore = ["D203", "D213"]
+# see https://docs.astral.sh/ruff/rules/
+select = [
+  "A",  # flake8-builtins
+  "ANN",  # flake8-annotations
+  "ARG",  # flake8-unused-arguments
+  "B",  # flake8-bugbear
+  "C",  # flake8-commas
+  "C4",  # flake8-comprehensions
+  "C90",  # mccabe
+  "D",  # pydocstyle
+  "DTZ",  # flake8-datetimez
+  "E",  # pycodestyle errors
+  "ERA",  # eradicate
+  "F",  # pyflakes
+  "FA",  # flake8-future-annotations
+  "G",  # flake8-logging-format
+  "I",  # isort
+  "ISC",  # flake8-implicit-str-concat
+  "LOG",  # flake8-logging
+  "N",  # pep8-naming
+  "PIE",  # flake8-pie
+  "PTH",  # flake8-use-pathlib
+  "RUF",  # Ruff-specific rules
+  "S",  # flake8-bandit
+  "SIM",  # flake8-simplify
+  "T10",  # flake8-debugger
+  "TCH",  # flake8-type-checking
+  "UP",  # pyupgrade
+  "W",  # pycodestyle warnings
+  "YTT",  # flake8-2020
+]
