@@ -18,15 +18,19 @@ requirements:
   build:
     - git  # for source/git_url above
   host:
-    - python >=3.10
+    # CPython 3.10–3.14 (see .github/workflows/tests.yml)
+    - python >=3.10,<3.15
     - pip
     - hatchling >=1.12.2
     - hatch-vcs >=0.2.0
   run:
-    - python >=3.10
+    - python >=3.10,<3.15
+    # Verification that discovers this trust root under av_data_dir (conda plugin path)
+    - conda-content-trust >=0.3.0
 
 test:
   requires:
+    - python >=3.10,<3.15
     - pip
   imports:
     - conda_anaconda_trust_root
@@ -43,10 +47,13 @@ about:
     This package installs the initial trust root metadata files to
     $CONDA_PREFIX/etc/conda/ where conda-content-trust can find them for
     signature verification bootstrapping.
+    Requires conda-content-trust 0.3.0 or later for that integration.
+    Supported Python versions: 3.10 through 3.14.
   # license: TBD - pending legal review
   # license_file: LICENSE
 
 extra:
   recipe-maintainers:
-    - kenodegard
+    - chenghlee
     - jezdez
+    - kenodegard
