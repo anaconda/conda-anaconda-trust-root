@@ -1,0 +1,52 @@
+{% set name = "conda-anaconda-trust-root" %}
+
+package:
+  name: {{ name|lower }}
+  # VERSION_OVERRIDE is used by the canary release workflow
+  version: {{ os.getenv("VERSION_OVERRIDE") or GIT_DESCRIBE_TAG }}.{{ GIT_DESCRIBE_NUMBER }}+{{ GIT_DESCRIBE_HASH }}
+
+source:
+  # git_url only captures committed code
+  git_url: ../
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
+  number: 0
+
+requirements:
+  build:
+    - git  # for source/git_url above
+  host:
+    - python >=3.10
+    - pip
+    - hatchling >=1.12.2
+    - hatch-vcs >=0.2.0
+  run:
+    - python >=3.10
+
+test:
+  requires:
+    - pip
+  imports:
+    - conda_anaconda_trust_root
+  commands:
+    - pip check
+    # Verify the data file is installed in the right place
+    - test -f $PREFIX/etc/conda/1.root.json  # [unix]
+    - if not exist %PREFIX%\etc\conda\1.root.json exit 1  # [win]
+
+about:
+  home: https://github.com/anaconda/{{ name }}
+  summary: Anaconda's initial trust root metadata for conda package signature verification
+  description: |
+    This package installs the initial trust root metadata files to
+    $CONDA_PREFIX/etc/conda/ where conda-content-trust can find them for
+    signature verification bootstrapping.
+  # license: TBD - pending legal review
+  # license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - kenodegard
+    - jezdez
