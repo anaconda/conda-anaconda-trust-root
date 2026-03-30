@@ -6,6 +6,8 @@ Anaconda's initial trust root metadata for conda package signature verification.
 
 The `conda-anaconda-trust-root` package installs the initial trust root metadata files that [conda-content-trust](https://github.com/conda/conda-content-trust) uses for verifying package signatures. This trust root establishes the chain of trust for package metadata verification based on [The Update Framework (TUF)](https://theupdateframework.io/).
 
+For signature verification that discovers this metadata under `$CONDA_PREFIX/etc/conda/`, use **conda-content-trust 0.3.0 or later** (conda plugin and verification logic that replaced the former in-core implementation).
+
 ## How It Works
 
 1. **Installation**: When this package is installed, it places `1.root.json` (and any subsequent root versions) into `$CONDA_PREFIX/etc/conda/`.

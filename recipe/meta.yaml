@@ -24,6 +24,8 @@ requirements:
     - hatch-vcs >=0.2.0
   run:
     - python >=3.10
+    # Verification that discovers this trust root under av_data_dir (conda plugin path)
+    - conda-content-trust >=0.3.0
 
 test:
   requires:
@@ -43,6 +45,7 @@ about:
     This package installs the initial trust root metadata files to
     $CONDA_PREFIX/etc/conda/ where conda-content-trust can find them for
     signature verification bootstrapping.
+    Requires conda-content-trust 0.3.0 or later for that integration.
   # license: TBD - pending legal review
   # license_file: LICENSE
 
