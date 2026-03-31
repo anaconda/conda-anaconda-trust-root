@@ -18,11 +18,12 @@ classifiers = [
   "Programming Language :: Python :: 3.14",
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
+  "License :: OSI Approved :: BSD License",
 ]
 dependencies = []
 description = "Anaconda's initial trust root metadata for conda package signature verification."
 dynamic = ["version"]
-# license = {file = "LICENSE"}  # TBD - pending legal review
+license = {file = "LICENSE"}
 name = "conda-anaconda-trust-root"
 requires-python = ">=3.10"
 

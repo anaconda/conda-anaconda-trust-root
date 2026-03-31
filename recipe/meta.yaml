@@ -49,8 +49,8 @@ about:
     signature verification bootstrapping.
     Requires conda-content-trust 0.3.0 or later for that integration.
     Supported Python versions: 3.10 through 3.14.
-  # license: TBD - pending legal review
-  # license_file: LICENSE
+  license: BSD-3-Clause
+  license_file: LICENSE
 
 extra:
   recipe-maintainers:
