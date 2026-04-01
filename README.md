@@ -103,4 +103,4 @@ Conda signature verification defends against:
 
 ## License
 
-TBD
+BSD 3-Clause. See [LICENSE](LICENSE) for details.
